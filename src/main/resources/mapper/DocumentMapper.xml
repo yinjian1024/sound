@@ -14,7 +14,7 @@
     <result column="CREATED_TX_STAMP" jdbcType="TIMESTAMP" property="createdTxStamp" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sound.entity.Document">
-    <result column="IMAGE_DATA" jdbcType="LONGVARBINARY" property="imageData" />
+    <result column="IMAGE_DATA" jdbcType="LONGVARCHAR" property="imageData" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -140,7 +140,7 @@
     values (#{documentId,jdbcType=VARCHAR}, #{documentTypeId,jdbcType=VARCHAR}, #{dateCreated,jdbcType=TIMESTAMP}, 
       #{comments,jdbcType=VARCHAR}, #{documentLocation,jdbcType=VARCHAR}, #{documentText,jdbcType=VARCHAR}, 
       #{lastUpdatedStamp,jdbcType=TIMESTAMP}, #{lastUpdatedTxStamp,jdbcType=TIMESTAMP}, 
-      #{createdStamp,jdbcType=TIMESTAMP}, #{createdTxStamp,jdbcType=TIMESTAMP}, #{imageData,jdbcType=LONGVARBINARY}
+      #{createdStamp,jdbcType=TIMESTAMP}, #{createdTxStamp,jdbcType=TIMESTAMP}, #{imageData,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sound.entity.Document">
@@ -212,7 +212,7 @@
         #{createdTxStamp,jdbcType=TIMESTAMP},
       </if>
       <if test="imageData != null">
-        #{imageData,jdbcType=LONGVARBINARY},
+        #{imageData,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -256,7 +256,7 @@
         CREATED_TX_STAMP = #{record.createdTxStamp,jdbcType=TIMESTAMP},
       </if>
       <if test="record.imageData != null">
-        IMAGE_DATA = #{record.imageData,jdbcType=LONGVARBINARY},
+        IMAGE_DATA = #{record.imageData,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -275,7 +275,7 @@
       LAST_UPDATED_TX_STAMP = #{record.lastUpdatedTxStamp,jdbcType=TIMESTAMP},
       CREATED_STAMP = #{record.createdStamp,jdbcType=TIMESTAMP},
       CREATED_TX_STAMP = #{record.createdTxStamp,jdbcType=TIMESTAMP},
-      IMAGE_DATA = #{record.imageData,jdbcType=LONGVARBINARY}
+      IMAGE_DATA = #{record.imageData,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -327,7 +327,7 @@
         CREATED_TX_STAMP = #{createdTxStamp,jdbcType=TIMESTAMP},
       </if>
       <if test="imageData != null">
-        IMAGE_DATA = #{imageData,jdbcType=LONGVARBINARY},
+        IMAGE_DATA = #{imageData,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where DOCUMENT_ID = #{documentId,jdbcType=VARCHAR}
@@ -343,7 +343,7 @@
       LAST_UPDATED_TX_STAMP = #{lastUpdatedTxStamp,jdbcType=TIMESTAMP},
       CREATED_STAMP = #{createdStamp,jdbcType=TIMESTAMP},
       CREATED_TX_STAMP = #{createdTxStamp,jdbcType=TIMESTAMP},
-      IMAGE_DATA = #{imageData,jdbcType=LONGVARBINARY}
+      IMAGE_DATA = #{imageData,jdbcType=LONGVARCHAR}
     where DOCUMENT_ID = #{documentId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sound.entity.Document">

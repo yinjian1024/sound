@@ -69,7 +69,7 @@
         <!-- pojo 实体生成器 -->
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
         <!-- schema即为数据库名 可不写 -->
-        <table  tableName="document" domainObjectName="Document"
+        <table  tableName="document_type_attr" domainObjectName="DocumentTypeAttr"
                 enableInsert="true" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                 enableSelectByExample="true" selectByExampleQueryId="true">
             <!-- 忽略字段 可选的（0 or 1） -->

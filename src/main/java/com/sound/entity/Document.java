@@ -23,7 +23,7 @@ public class Document {
 
     private Date createdTxStamp;
 
-    private byte[] imageData;
+    private String imageData;
 
     public String getDocumentId() {
         return documentId;
@@ -105,11 +105,11 @@ public class Document {
         this.createdTxStamp = createdTxStamp;
     }
 
-    public byte[] getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
+    public void setImageData(String imageData) {
+        this.imageData = imageData == null ? null : imageData.trim();
     }
 }
