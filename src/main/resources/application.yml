@@ -1,3 +1,17 @@
+server:
+  port: 8080
 spring:
-  profiles:
-    active: dev
+  application:
+    name: sound
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #   数据源基本配置
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://rm-2ze2wi1d65jrg97k92o.mysql.rds.aliyuncs.com:3306/sound_db?useunicode=true&characterEncoding=utf8&userSSL=false
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sound.entity #所有entity别名类所在的包
+
