@@ -9,7 +9,7 @@
    |- utils                  //常用工具类
      |- zip                  //zip处理
      |- excel                //excel处理
-|- module
+|- com
    |- authority              //系统权限管理模块
      |- permission           //权限管理
      |- role                 //角色管理
@@ -17,7 +17,7 @@
    |- organization           //组织机构管理
      |- group                //组织
      |- user                 //用户
-       |- controller         // 存放所有controller接口
+       |- com.controller         // 存放所有controller接口
        |- entity             // 存放持久层对象
        |- dto                // 存放数据传输对象
        |- service            // 存放服务接口和实现类
