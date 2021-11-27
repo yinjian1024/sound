@@ -9,6 +9,9 @@
 
     <context id="MysqlTables" targetRuntime="MyBatis3">
 
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
         <!-- 注意这里面的顺序确定的，不能随变更改 -->
         <!-- 自定义的分页插件 <plugin type="com.deppon.foss.module.helloworld.shared.PaginationPlugin"/> -->
 
