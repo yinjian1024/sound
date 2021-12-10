@@ -23,6 +23,15 @@ public class Article {
         return articleService.createArticle(params);
     }
 
+    /**
+     * 发布文章
+     * @param params
+     * @return
+     */
+    @RequestMapping(value = "/publish", method = RequestMethod.POST)
+    public Map<String,Object> publishArticle(@RequestBody Map<String,Object> params){
+        return articleService.createArticle(params);
+    }
 
     /**
      * 分页查询文章

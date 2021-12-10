@@ -81,6 +81,12 @@ public class ArticleService {
         String documentAttribute_attrValue_display_time = display_time;//属性值
         String documentAttribute_attrDescription_display_time = "发布时间";//属性描述
 
+        // documentAttribute_display_comment_disabled
+        String documentAttribute_documentId_display_comment_disabled = uuid;//内容ID
+        String documentAttribute_attrName_display_comment_disabled = "comment_disabled";//属性名称-作者
+        String documentAttribute_attrValue_display_comment_disabled = String.valueOf(comment_disabled);//属性值
+        String documentAttribute_attrDescription_display_comment_disabled = "是否上传";//属性描述
+
 
 //        // documentType
 //        String documentType_documentTypeId = documentTypeId;//标题/菜单类型
@@ -188,6 +194,25 @@ public class ArticleService {
             DocumentAttributeExample documentAttributeExample_display_time = new DocumentAttributeExample();
             documentAttributeExample_display_time.createCriteria().andDocumentIdEqualTo(documentAttribute_documentId_display_time).andAttrNameEqualTo(documentAttribute_attrName_display_time);
             documentAttributeMapper.updateByExampleSelective(documentAttribute_display_time,documentAttributeExample_display_time);
+        }
+
+        // 创建 documentAttribute_display_comment_disabled
+        DocumentAttribute documentAttribute_display_comment_disabled = new DocumentAttribute();
+        documentAttribute_display_comment_disabled.setDocumentId(documentAttribute_documentId_display_comment_disabled);
+        documentAttribute_display_comment_disabled.setAttrName(documentAttribute_attrName_display_comment_disabled);
+        documentAttribute_display_comment_disabled.setAttrValue(documentAttribute_attrValue_display_comment_disabled);
+        documentAttribute_display_comment_disabled.setAttrDescription(documentAttribute_attrDescription_display_comment_disabled);
+
+
+        DocumentAttributeKey documentAttributeKey_display_comment_disabled = new DocumentAttributeKey();
+        documentAttributeKey_display_comment_disabled.setDocumentId(documentAttribute_documentId_display_comment_disabled);
+        documentAttributeKey_display_comment_disabled.setAttrName(documentAttribute_attrName_display_comment_disabled);
+        if(null == documentAttributeMapper.selectByPrimaryKey(documentAttributeKey_display_comment_disabled)){
+            documentAttributeMapper.insertSelective(documentAttribute_display_comment_disabled);
+        } else {
+            DocumentAttributeExample documentAttributeExample_display_comment_disabled = new DocumentAttributeExample();
+            documentAttributeExample_display_comment_disabled.createCriteria().andDocumentIdEqualTo(documentAttribute_documentId_display_comment_disabled).andAttrNameEqualTo(documentAttribute_attrName_display_comment_disabled);
+            documentAttributeMapper.updateByExampleSelective(documentAttribute_display_comment_disabled,documentAttributeExample_display_comment_disabled);
         }
 
 
@@ -317,6 +342,9 @@ public class ArticleService {
             if("importance".equals(attrName)){
                 Integer attrValue = Integer.valueOf(documentAttribute.getAttrValue());
                 articleMap.put(attrName,attrValue);
+            } else if("comment_disabled".equals(attrName)){
+                Boolean attrValue = Boolean.valueOf(documentAttribute.getAttrValue());
+                articleMap.put(attrName,attrValue);
             } else {
                 String attrValue = documentAttribute.getAttrValue();
                 articleMap.put(attrName,attrValue);
@@ -330,6 +358,7 @@ public class ArticleService {
         articleMap.put("content",document.getImageData());
         articleMap.put("content_short",document.getComments());
         articleMap.put("timestamp",document.getDateCreated().getTime());
+        articleMap.put("source_uri",document.getDocumentLocation());
 
 
 //                "comment_disabled": true,
