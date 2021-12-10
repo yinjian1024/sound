@@ -82,17 +82,23 @@ public class ArticleService {
         String documentAttribute_attrValue_status = status;//属性值
         String documentAttribute_attrDescription_status = "文章状态";//属性描述
 
+        // documentAttribute_display_time
+        String documentAttribute_documentId_display_time = uuid;//内容ID
+        String documentAttribute_attrName_display_time = "display_time";//属性名称-作者
+        String documentAttribute_attrValue_display_time = display_time;//属性值
+        String documentAttribute_attrDescription_display_time = "发布时间";//属性描述
 
-        // documentType
-        String documentType_documentTypeId = documentTypeId;//标题/菜单类型
-        String documentType_parentTypeId = "ROOT";//父级标题
-        String documentType_hasTable = "0";//状态：0-保存、1-发布、2-上传
-        String documentType_description = "1";//菜单类型：1-标题、2-文章
 
-        // documentTypeAttr
-        String documentTypeAttr_documentTypeId = documentTypeId;//标题/菜单类型
-        String documentTypeAttr_attrName = classify;//标题/菜单名称
-        String documentTypeAttr_description = "";//标题/菜单描述
+//        // documentType
+//        String documentType_documentTypeId = documentTypeId;//标题/菜单类型
+//        String documentType_parentTypeId = "ROOT";//父级标题
+//        String documentType_hasTable = "0";//状态：0-保存、1-发布、2-上传
+//        String documentType_description = "1";//菜单类型：1-标题、2-文章
+//
+//        // documentTypeAttr
+//        String documentTypeAttr_documentTypeId = documentTypeId;//标题/菜单类型
+//        String documentTypeAttr_attrName = classify;//标题/菜单名称
+//        String documentTypeAttr_description = "";//标题/菜单描述
 
 
         // 创建 document
@@ -172,38 +178,56 @@ public class ArticleService {
             documentAttributeMapper.updateByExampleSelective(documentAttribute_status,documentAttributeExample_status);
         }
 
+        // 创建 documentAttribute_display_time
+        DocumentAttribute documentAttribute_display_time = new DocumentAttribute();
+        documentAttribute_display_time.setDocumentId(documentAttribute_documentId_display_time);
+        documentAttribute_display_time.setAttrName(documentAttribute_attrName_display_time);
+        documentAttribute_display_time.setAttrValue(documentAttribute_attrValue_display_time);
+        documentAttribute_display_time.setAttrDescription(documentAttribute_attrDescription_display_time);
 
 
-
-        // 创建 documentType
-        DocumentType documentType = new DocumentType();
-        documentType.setDocumentTypeId(documentType_documentTypeId);
-        documentType.setParentTypeId(documentType_parentTypeId);
-        documentType.setHasTable(documentType_hasTable);
-        documentType.setDescription(documentType_description);
-
-        if(null == documentTypeMapper.selectByPrimaryKey(documentType_documentTypeId)){
-            documentTypeMapper.insertSelective(documentType);
+        DocumentAttributeKey documentAttributeKey_display_time = new DocumentAttributeKey();
+        documentAttributeKey_display_time.setDocumentId(documentAttribute_documentId_display_time);
+        documentAttributeKey_display_time.setAttrName(documentAttribute_attrName_display_time);
+        if(null == documentAttributeMapper.selectByPrimaryKey(documentAttributeKey_display_time)){
+            documentAttributeMapper.insertSelective(documentAttribute_display_time);
         } else {
-            documentTypeMapper.updateByPrimaryKey(documentType);
+            DocumentAttributeExample documentAttributeExample_display_time = new DocumentAttributeExample();
+            documentAttributeExample_display_time.createCriteria().andDocumentIdEqualTo(documentAttribute_documentId_display_time).andAttrNameEqualTo(documentAttribute_attrName_display_time);
+            documentAttributeMapper.updateByExampleSelective(documentAttribute_display_time,documentAttributeExample_display_time);
         }
 
 
-        // 创建 documentTypeAttr
-        DocumentTypeAttr documentTypeAttr = new DocumentTypeAttr();
-        documentTypeAttr.setDocumentTypeId(documentTypeAttr_documentTypeId);
-        documentTypeAttr.setAttrName(documentTypeAttr_attrName);
-        documentTypeAttr.setDescription(documentTypeAttr_description);
-
-        DocumentTypeAttrKey documentTypeAttrKey = new DocumentTypeAttrKey();
-        documentTypeAttrKey.setDocumentTypeId(documentTypeAttr_documentTypeId);
-        documentTypeAttrKey.setAttrName(documentTypeAttr_attrName);
-
-        if(null == documentTypeAttrMapper.selectByPrimaryKey(documentTypeAttrKey)){
-            documentTypeAttrMapper.insertSelective(documentTypeAttr);
-        } else {
-            documentTypeAttrMapper.updateByPrimaryKey(documentTypeAttr);
-        }
+//
+//        // 创建 documentType
+//        DocumentType documentType = new DocumentType();
+//        documentType.setDocumentTypeId(documentType_documentTypeId);
+//        documentType.setParentTypeId(documentType_parentTypeId);
+//        documentType.setHasTable(documentType_hasTable);
+//        documentType.setDescription(documentType_description);
+//
+//        if(null == documentTypeMapper.selectByPrimaryKey(documentType_documentTypeId)){
+//            documentTypeMapper.insertSelective(documentType);
+//        } else {
+//            documentTypeMapper.updateByPrimaryKey(documentType);
+//        }
+//
+//
+//        // 创建 documentTypeAttr
+//        DocumentTypeAttr documentTypeAttr = new DocumentTypeAttr();
+//        documentTypeAttr.setDocumentTypeId(documentTypeAttr_documentTypeId);
+//        documentTypeAttr.setAttrName(documentTypeAttr_attrName);
+//        documentTypeAttr.setDescription(documentTypeAttr_description);
+//
+//        DocumentTypeAttrKey documentTypeAttrKey = new DocumentTypeAttrKey();
+//        documentTypeAttrKey.setDocumentTypeId(documentTypeAttr_documentTypeId);
+//        documentTypeAttrKey.setAttrName(documentTypeAttr_attrName);
+//
+//        if(null == documentTypeAttrMapper.selectByPrimaryKey(documentTypeAttrKey)){
+//            documentTypeAttrMapper.insertSelective(documentTypeAttr);
+//        } else {
+//            documentTypeAttrMapper.updateByPrimaryKey(documentTypeAttr);
+//        }
 
 
         Map<String,Object> returnMap = new HashMap<String,Object>();
@@ -246,12 +270,12 @@ public class ArticleService {
 
         List<Map<String,Object>> items = new ArrayList<Map<String,Object>>();
 
-        Map<String,Object> articleMap = new HashMap<String,Object>();
 
         for (Document document : pageList) {
 
-            articleMap.put("id",document.getDocumentId());
+            Map<String,Object> articleMap = new HashMap<String,Object>();
 
+            articleMap.put("id",document.getDocumentId());
 
             // 查询文章属性表
             DocumentAttributeExample documentAttributeExample = new DocumentAttributeExample();
@@ -283,5 +307,55 @@ public class ArticleService {
 
     }
 
+    public Map<String,Object> detailArticle(Long id){
 
+        Document document = documentMapper.selectByPrimaryKey(String.valueOf(id));
+
+
+
+        Map<String,Object> articleMap = new HashMap<String,Object>();
+        // 查询文章属性表
+        DocumentAttributeExample documentAttributeExample = new DocumentAttributeExample();
+        documentAttributeExample.createCriteria().andDocumentIdEqualTo(document.getDocumentId());
+        List<DocumentAttribute> documentAttributes = documentAttributeMapper.selectByExample(documentAttributeExample);
+        // 动态添加属性
+        for (DocumentAttribute documentAttribute : documentAttributes) {
+            String attrName = documentAttribute.getAttrName();
+            if("importance".equals(attrName)){
+                Integer attrValue = Integer.valueOf(documentAttribute.getAttrValue());
+                articleMap.put(attrName,attrValue);
+            } else {
+                String attrValue = documentAttribute.getAttrValue();
+                articleMap.put(attrName,attrValue);
+            }
+        }
+
+
+        articleMap.put("id",Long.valueOf(document.getDocumentId()));
+        articleMap.put("title",document.getDocumentText());
+        articleMap.put("content",document.getImageData());
+        articleMap.put("content_short",document.getComments());
+        articleMap.put("timestamp",document.getDateCreated().getTime());
+
+
+//                "comment_disabled": true,
+//                "display_time": "1992-10-23 15:24:24",
+//                "forecast": 46.26,
+//                "image_uri": "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3",
+//                "pageviews": 824,
+//                "platforms": [
+//        "a-platform"
+//        ],
+//        "reviewer": "Brian",
+//                "type": "US"
+
+
+
+
+
+        Map<String,Object> returnMap = new HashMap<String,Object>();
+        returnMap.put("code",20000);
+        returnMap.put("data",articleMap);
+        return returnMap;
+    }
 }

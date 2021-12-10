@@ -2,10 +2,7 @@ package com.sound.controller.article;
 
 import com.sound.service.article.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -28,7 +25,7 @@ public class Article {
 
 
     /**
-     * 创建文章
+     * 分页查询文章
      * @param params
      * @return
      */
@@ -37,6 +34,16 @@ public class Article {
         return articleService.listArticle(params);
     }
 
+
+    /**
+     * 查询文章明细
+     * @param params
+     * @return
+     */
+    @GetMapping("/detail")
+    public Map<String,Object> detailArticle(@RequestParam("id") Long id){
+        return articleService.detailArticle(id);
+    }
 
 
 
