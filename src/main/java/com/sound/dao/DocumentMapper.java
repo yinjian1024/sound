@@ -2,10 +2,12 @@ package com.sound.dao;
 
 import com.sound.entity.Document;
 import com.sound.entity.DocumentExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface DocumentMapper {
     long countByExample(DocumentExample example);
 

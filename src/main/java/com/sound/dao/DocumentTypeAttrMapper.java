@@ -3,9 +3,12 @@ package com.sound.dao;
 import com.sound.entity.DocumentTypeAttr;
 import com.sound.entity.DocumentTypeAttrExample;
 import com.sound.entity.DocumentTypeAttrKey;
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+@Mapper
 public interface DocumentTypeAttrMapper {
     long countByExample(DocumentTypeAttrExample example);
 

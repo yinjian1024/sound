@@ -1,7 +1,15 @@
 package com.sound.entity;
 
+import lombok.*;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class DocumentAttribute extends DocumentAttributeKey {
     private String attrValue;
 

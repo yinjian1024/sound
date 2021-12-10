@@ -6,10 +6,10 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源基本配置
-    username: root
-    password: root
+    username: sound
+    password: 1q@w3e4r
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-2ze2wi1d65jrg97k92o.mysql.rds.aliyuncs.com:3306/sound_db?useunicode=true&characterEncoding=utf8&userSSL=false
+    url: jdbc:mysql://rm-2ze2wi1d65jrg97k92o.mysql.rds.aliyuncs.com:3306/sound_db?useunicode=true&characterEncoding=utf8&userSSL=false&allowPublicKeyRetrieval=true
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
