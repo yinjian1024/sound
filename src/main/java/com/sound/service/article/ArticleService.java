@@ -46,18 +46,11 @@ public class ArticleService {
         String display_time = (String) params.get("display_time");
         Boolean comment_disabled = (Boolean) params.get("comment_disabled");
 
-
-        String documentTypeId = "";
-        if("java".equals(classify)){
-            documentTypeId = "1";
-        }
-
-
         String uuid = String.valueOf(id);
 
         // document
         String document_documentId = uuid; // 内容ID
-        String document_documentTypeId = documentTypeId; //内容类型ID
+        String document_documentTypeId = classify; //内容类型ID
         Date document_dateCreated = new Date(); //创建日期
         String document_comments = content_short;//总结
         String document_documentLocation = source_uri;//文档地址
@@ -332,6 +325,7 @@ public class ArticleService {
 
 
         articleMap.put("id",Long.valueOf(document.getDocumentId()));
+        articleMap.put("classify",document.getDocumentTypeId());
         articleMap.put("title",document.getDocumentText());
         articleMap.put("content",document.getImageData());
         articleMap.put("content_short",document.getComments());
