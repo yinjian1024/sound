@@ -55,6 +55,14 @@
             <version>1.18.4</version>
         </dependency>
 
+
+        <!--ftp-->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -21,3 +21,11 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+ftp:
+  host: 172.16.1.158
+  port: 21
+  username: root
+  password: CentOS8.
+  basePath: /home/ftp/www
+  httpPath: http://192.168.134.139
