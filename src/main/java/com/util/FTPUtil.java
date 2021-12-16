@@ -18,9 +18,7 @@ import java.io.OutputStream;
 public class FTPUtil {
 
 
-    @Autowired
-    @Qualifier("FtpProperties")
-    private FtpProperties ftpProperties;
+    private FtpProperties ftpProperties = new FtpProperties();
 
     /**
      * 文件上传

@@ -23,9 +23,9 @@ pagehelper:
   params: count=countSql
 
 ftp:
-  host: 172.16.1.158
+  host: 8.141.64.204
   port: 21
   username: root
-  password: CentOS8.
-  basePath: /home/ftp/www
+  password: centOS8.
+  basePath: /root/nginx/html/article
   httpPath: http://192.168.134.139

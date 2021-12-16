@@ -1,5 +1,6 @@
 package com.sound.controller.ftp;
 
+import com.util.FTPUtil;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.apache.tomcat.util.http.fileupload.util.Streams;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,18 +29,21 @@ public class Ftp {
         try {
             if (multipartFiles != null && multipartFiles.length > 0) {
                 for(int i = 0;i<multipartFiles.length;i++){
-                    try {
-                        //以原来的名称命名,覆盖掉旧的
-                        String storagePath = rootPath+multipartFiles[i].getOriginalFilename();
-                        System.out.println("上传的文件：" + multipartFiles[i].getName() + "," + multipartFiles[i].getContentType() + "," + multipartFiles[i].getOriginalFilename()
-                                +"，保存的路径为：" + storagePath);
-                        Streams.copy(multipartFiles[i].getInputStream(), new FileOutputStream(storagePath), true);
-                        //或者下面的
-                        // Path path = Paths.get(storagePath);
-                        //Files.write(path,multipartFiles[i].getBytes());
-                    } catch (IOException e) {
-                        System.out.println(e.getMessage());
-                    }
+
+                    new FTPUtil().uploadFile(multipartFiles[i]);
+
+//                    try {
+//                        //以原来的名称命名,覆盖掉旧的
+//                        String storagePath = rootPath+multipartFiles[i].getOriginalFilename();
+//                        System.out.println("上传的文件：" + multipartFiles[i].getName() + "," + multipartFiles[i].getContentType() + "," + multipartFiles[i].getOriginalFilename()
+//                                +"，保存的路径为：" + storagePath);
+//                        Streams.copy(multipartFiles[i].getInputStream(), new FileOutputStream(storagePath), true);
+//                        //或者下面的
+//                        // Path path = Paths.get(storagePath);
+//                        //Files.write(path,multipartFiles[i].getBytes());
+//                    } catch (IOException e) {
+//                        System.out.println(e.getMessage());
+//                    }
                 }
             }
 
