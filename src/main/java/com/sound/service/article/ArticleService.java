@@ -361,21 +361,6 @@ public class ArticleService {
         articleMap.put("source_uri",document.getDocumentLocation());
 
 
-//                "comment_disabled": true,
-//                "display_time": "1992-10-23 15:24:24",
-//                "forecast": 46.26,
-//                "image_uri": "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3",
-//                "pageviews": 824,
-//                "platforms": [
-//        "a-platform"
-//        ],
-//        "reviewer": "Brian",
-//                "type": "US"
-
-
-
-
-
         Map<String,Object> returnMap = new HashMap<String,Object>();
         returnMap.put("code",20000);
         returnMap.put("data",articleMap);

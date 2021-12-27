@@ -18,8 +18,7 @@ public class Login {
     private LoginService loginService;
 
     /**
-     * 创建文章
-     * @param params
+     * 登陆
      * @return
      */
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
@@ -29,14 +28,23 @@ public class Login {
 
 
     /**
-     * 创建文章
-     * @param params
+     * 获取用户信息
      * @return
      */
     @RequestMapping(value = "/info", method = {RequestMethod.GET})
     public String info(HttpServletRequest request, HttpServletResponse response){
         System.out.println(request.getParameter("token"));
         return loginService.info();
+    }
+
+
+    /**
+     * 登出
+     * @return
+     */
+    @RequestMapping(value = "/logout", method = {RequestMethod.POST})
+    public String logout(@RequestBody String params){
+        return loginService.logout();
     }
 
 
